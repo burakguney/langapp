@@ -1,0 +1,26 @@
+.navbar .nav-link {
+    color: #0C346F;
+}
+
+.navbar .nav-link:hover {
+    color: #F9A826;
+}
+
+footer .nav-link {
+    color: #0C346F;
+}
+
+footer .nav-link:hover {
+    color: #F9A826;
+}
+
+.btn-primary {
+    background-color: #0C346F;
+    border: 0px;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #F9A826;
+    color: white;
+}
