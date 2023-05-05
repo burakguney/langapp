@@ -6,46 +6,72 @@ const Game = () => {
     const { id } = useParams();
 
     const [words, setWords] = useState([]);
+    const [question, setQuestion] = useState(Object);
+    const [message, setMessage] = useState("");
+
 
     useEffect(() => {
         if (id) {
-            getWordsByCategoryId(id);
+            setTimeout(() => {
+                getWordsByCategoryId(id);
+            }, 2000);
         }
     }, [id]);
 
     const getWordsByCategoryId = (id) => {
         http.get(`/word/category/${id}`)
             .then(response => {
-                setWords(response.data);
-                console.log(response.data);
+                const responseData = response.data;
+                setWords(responseData);
+                setQuestion(responseData[Math.floor(Math.random() * words.length)]);
+                setMessage("");
             }).catch(err => {
                 console.log(err);
             })
     }
 
-    const refresh = () => {
-        if (id) {
-            getWordsByCategoryId(id);
+    const refresh = (categoryId) => {
+        if (categoryId) {
+            getWordsByCategoryId(categoryId);
+        }
+    }
+
+    const checkWord = (wordId) => {
+        if (wordId === question._id) {
+            setMessage("Yeni Kelime");
+        } else {
+            setMessage("Yanlış");
         }
     }
 
     return (
         <div>
             {
-                words.length > 0 && (
+                words.length > 0 && question ? (
                     <div className="p-3 text-center bg-body-white rounded">
-                        <h1 className="text-body-emphasis my-5">{words[Math.floor(Math.random() * words.length)].english}</h1>
+                        <h1 className="text-body-emphasis my-5">{question.english}</h1>
                         {words.map((word) => (
-                            <button className="btn btn-primary m-2" type="button">{word.turkish}</button>
+                            <button className="btn btn-outline-success m-1" type="button" onClick={() => checkWord(word._id)} key={word._id}>{word.turkish}</button>
                         ))}
                         <br />
-                        <div className="my-5">
-                            <div class="d-grid gap-2 col-lg-3 col-md-4 col-6 mx-auto">
-                                <button className="btn btn-warning" onClick={refresh} type="button">Geç</button>
-                            </div>
-                        </div>
+                        {
+                            message ? (
+                                message === "Yeni Kelime" ?
+                                    (<div>
+                                        <button className="btn btn-success mt-5 shadow" onClick={() => refresh(question.category)} type="button">{message}</button>
+                                    </div>
+                                    ) :
+                                    (<h4 className='mt-5'><span className="badge text-bg-danger">{message}</span></h4>)
+                            ) : (
+                                <h4 className="mt-5"><span className="badge text-bg-light">...</span></h4>
+                            )
+                        }
                     </div>
-                )
+                ) : (<div class="d-flex justify-content-center">
+                    <div class="spinner-grow" role="status">
+                    </div>
+                    <h3 className='mt-5'>Game Loading...</h3>
+                </div>)
             }
 
         </div>

@@ -16,6 +16,9 @@ const Navbar = () => {
                                 <Link className="nav-link" to="/">Anasayfa</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/categories">Kategoriler</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/words">Kelimelerim</Link>
                             </li>
                             <li className="nav-item">
