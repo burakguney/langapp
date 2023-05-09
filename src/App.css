@@ -13,14 +13,3 @@ footer .nav-link {
 footer .nav-link:hover {
     color: #F9A826;
 }
-
-.btn-primary {
-    background-color: #0C346F;
-    border: 0px;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #F9A826;
-    color: white;
-}

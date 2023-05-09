@@ -6,8 +6,9 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Game from "./components/Game";
 import Categories from "./components/Categories";
-import Word from "./components/Word";
-import Login from "./components/Login";
+import WordList from "./components/WordList";
+import AddWord from "./components/AddWord";
+import EditWord from "./components/EditWord";
 
 
 function App() {
@@ -18,10 +19,11 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/game/category/:id" element={<Game />} />
+          <Route path="/game/category/:categoryName" element={<Game />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/words" element={<Word />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/wordList" element={<WordList />} />
+          <Route path="/addWord" element={<AddWord />} />
+          <Route path="/editWord/:id" element={<EditWord />} />
         </Routes>
       </div>
 
