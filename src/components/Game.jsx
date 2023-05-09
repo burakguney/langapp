@@ -39,19 +39,29 @@ const Game = () => {
     return (
         <div>
             {
-                <div className="p-3 text-center bg-body-white rounded">
-                    <h1 className="text-body-emphasis my-5">{question.english}</h1>
-                    {
-                        words.map((word) => (
-                            <button className="btn btn-outline-success m-1" type="button" onClick={() => checkWord(word._id)} key={word._id}>{word.turkish}</button>
-                        ))
-                    }
+                <div className="p-3 text-center bg-body-white">
+                    <h1 className="text-body-emphasis mb-5 border p-5 col-lg-6 col-md-8 col-12 mx-auto rounded shadow">{question.english}</h1>
                     <br />
-                    {
-                        message && (
-                            <label className="btn btn-danger my-5 disabled">{message} !</label>
-                        )
-                    }
+                    <div class="d-grid gap-2 col-lg-2 col-md-3 col-sm-4 col-8 mx-auto">
+                        {
+                            words.map((word) => (
+                                <button className="btn btn-outline-success" type="button" onClick={() => checkWord(word._id)} key={word._id}>{word.turkish}</button>
+                            ))
+                        }
+                    </div>
+                    <br />
+                    <div className='my-5'>
+                        {
+                            message ?
+                                (
+                                    <h4><span className="badge text-bg-danger">{message} !</span></h4>
+                                )
+                                :
+                                (
+                                    <h4><span className="badge disabled">.</span></h4>
+                                )
+                        }
+                    </div>
                 </div>
             }
         </div >
