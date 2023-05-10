@@ -14,8 +14,8 @@ const AddCategory = () => {
         description: ""
     };
 
-    const [category, setCategory] = useState(initialCategoryState);
-    const [submitted, setSubmitted] = useState(false);
+    const [category, setCategory] = useState<Category>(initialCategoryState);
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;

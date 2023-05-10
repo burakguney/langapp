@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import http from '../../http-common';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ interface Word {
     turkish: string;
     english: string;
     category: {
+        _id: string,
         name: string,
         description: string
     };
@@ -21,6 +22,8 @@ const WordList = () => {
             .then(response => {
                 const responseData = response.data;
                 setWords(responseData);
+
+                console.log(responseData);
             }).catch(err => {
                 console.log(err);
             })

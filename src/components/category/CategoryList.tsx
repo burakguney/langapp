@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import http from '../../http-common';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,6 @@ interface Category {
 const CategoryList = () => {
 
     const [categories, setCategories] = useState<Category[]>([]);
-
 
     const getCategories = useCallback(() => {
         http.get("/category")

@@ -1,4 +1,3 @@
-import React from 'react'
 import edu from '../images/edu.svg'
 import { Link } from 'react-router-dom'
 
