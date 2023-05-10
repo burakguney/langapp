@@ -19,7 +19,7 @@ const Navbar = () => {
                                 <Link className="nav-link" to="/categories">Kategoriler</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/wordList">Kelimelerim</Link>
+                                <Link className="nav-link" to="/wordList">Kelimeler</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/">Profil</Link>

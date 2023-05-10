@@ -22,16 +22,15 @@ const Categories = () => {
         <div>
             <div className="card text-center">
                 <div className="card-header">
-                    Öğrenmek İstediğin Kategoriyi Seç!
+                    Öğrenmek İstediğin Seviyeyi Seç!
                 </div>
             </div>
             <br /><br />
             <div className="row">
                 {
                     categories.map((category) => (
-                        <div className="col-lg-3 col-md-4 col-sm-6 mb-3" key={category._id}>
-                            <div class="card text-center">
-                                <img src="https://placeimg.com/640/480/tech" class="card-img-top" alt="..." />
+                        <div className="col-lg-3 col-md-6 col-sm-6 mb-3" key={category._id}>
+                            <div class="card text-center shadow">
                                 <div class="card-body">
                                     <h5 class="card-title">{category.name}</h5>
                                     <p class="card-text">{category.description}</p>
