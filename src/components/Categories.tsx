@@ -1,9 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import http from "../http-common";
 
+interface Category {
+    _id: string;
+    name: string;
+    description: string;
+}
+
 const Categories = () => {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const getCategories = useCallback(() => {
         http.get("/category")
@@ -30,10 +36,10 @@ const Categories = () => {
                 {
                     categories.map((category) => (
                         <div className="col-lg-3 col-md-6 col-sm-6 mb-3" key={category._id}>
-                            <div class="card text-center shadow">
-                                <div class="card-body">
-                                    <h5 class="card-title">{category.name}</h5>
-                                    <p class="card-text">{category.description}</p>
+                            <div className="card text-center shadow">
+                                <div className="card-body">
+                                    <h5 className="card-title">{category.name}</h5>
+                                    <p className="card-text">{category.description}</p>
                                     <Link to={`/game/category/${category.name}`} className="btn btn-success">Başla</Link>
                                 </div>
                             </div>

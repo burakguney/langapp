@@ -1,13 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import http from '../http-common';
 import { useParams } from 'react-router-dom'
+
+interface Word {
+    _id: string;
+    turkish: string;
+    english: string;
+    category: string;
+}
 
 const Game = () => {
     const { categoryName } = useParams();
 
-    const [words, setWords] = useState([]);
-    const [question, setQuestion] = useState({});
-    const [message, setMessage] = useState(null);
+    const [words, setWords] = useState<Word[]>([]);
+    const [question, setQuestion] = useState<Word>(Object);
+    const [message, setMessage] = useState<String>();
 
     const getWordsByCategory = useCallback(() => {
         http.get(`/word/category/${categoryName}`)
@@ -18,7 +25,7 @@ const Game = () => {
                     setWords(responseData);
                     setQuestion(responseData[Math.floor(Math.random() * responseData.length)]);
                 }
-                setMessage(null);
+                setMessage("");
             }).catch(err => {
                 console.log(err);
             })
@@ -28,7 +35,7 @@ const Game = () => {
         getWordsByCategory();
     }, [getWordsByCategory]);
 
-    const checkWord = (wordId) => {
+    const checkWord = (wordId: string) => {
         if (wordId === question._id) {
             getWordsByCategory();
         } else {
@@ -42,7 +49,7 @@ const Game = () => {
                 <div className="p-3 text-center bg-body-white">
                     <h1 className="text-body-emphasis mb-5 border p-5 col-lg-6 col-md-8 col-12 mx-auto rounded shadow">{question.english}</h1>
                     <br />
-                    <div class="d-grid gap-2 col-lg-2 col-md-3 col-sm-4 col-8 mx-auto">
+                    <div className="d-grid gap-2 col-lg-2 col-md-3 col-sm-4 col-8 mx-auto">
                         {
                             words.map((word) => (
                                 <button className="btn btn-outline-success" type="button" onClick={() => checkWord(word._id)} key={word._id}>{word.turkish}</button>

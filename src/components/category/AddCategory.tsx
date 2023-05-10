@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import http from "../../http-common";
 
+interface Category {
+    _id: string;
+    name: string;
+    description: string;
+}
+
 const AddCategory = () => {
-    const initialCategoryState = {
-        id: null,
+    const initialCategoryState: Category = {
+        _id: "",
         name: "",
         description: ""
     };
+
     const [category, setCategory] = useState(initialCategoryState);
     const [submitted, setSubmitted] = useState(false);
 
-    const handleInputChange = event => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setCategory({ ...category, [name]: value });
     };
@@ -26,7 +33,7 @@ const AddCategory = () => {
         http.post("/category", data)
             .then(response => {
                 setCategory({
-                    id: response.data.id,
+                    _id: response.data._id,
                     name: response.data.name,
                     description: response.data.description
                 });

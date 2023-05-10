@@ -1,17 +1,31 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { ChangeEvent, useState, useCallback, useEffect } from "react";
 import http from "../../http-common";
 
+interface Category {
+    _id: string;
+    name: string;
+    description: string;
+}
+
+interface Word {
+    _id: string;
+    turkish: string;
+    english: string;
+    category: string;
+}
+
 const AddWord = () => {
-    const initialWordState = {
-        id: null,
+    const initialWordState: Word = {
+        _id: "",
         turkish: "",
         english: "",
         category: ""
     };
+
     const [word, setWord] = useState(initialWordState);
     const [submitted, setSubmitted] = useState(false);
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const getCategories = useCallback(() => {
         http.get("/category")
@@ -26,13 +40,13 @@ const AddWord = () => {
         getCategories();
     }, [getCategories]);
 
-    const handleInputChange = event => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setWord({ ...word, [name]: value });
     };
 
     const saveWord = () => {
-        var data = {
+        const data = {
             turkish: word.turkish.toLowerCase(),
             english: word.english.toLowerCase(),
             category: word.category
@@ -43,7 +57,7 @@ const AddWord = () => {
         http.post("/word", data)
             .then(response => {
                 setWord({
-                    id: response.data.id,
+                    _id: response.data._id,
                     turkish: response.data.turkish,
                     english: response.data.english,
                     category: response.data.category.name

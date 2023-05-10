@@ -2,9 +2,19 @@ import React, { useState, useCallback, useEffect } from 'react'
 import http from '../../http-common';
 import { Link } from 'react-router-dom';
 
+interface Word {
+    _id: string;
+    turkish: string;
+    english: string;
+    category: {
+        name: string,
+        description: string
+    };
+}
+
 const WordList = () => {
 
-    const [words, setWords] = useState([]);
+    const [words, setWords] = useState<Word[]>([]);
 
     const getWords = useCallback(() => {
         http.get(`/word`)
@@ -16,7 +26,7 @@ const WordList = () => {
             })
     }, []);
 
-    const deleteWord = (id) => {
+    const deleteWord = (id: string) => {
         http.delete(`/word/${id}`)
             .then(response => {
                 getWords();
@@ -53,7 +63,7 @@ const WordList = () => {
                                     <td>{word.category.name}</td>
                                     <td className='text-center'>
                                         <Link className="btn badge btn-primary" to={`/editWord/${word._id}`}>Güncelle</Link>
-                                        <Link className="btn badge btn-danger mx-2" onClick={() => deleteWord(word._id)}>Sil</Link>
+                                        <button className="btn badge btn-danger mx-2" onClick={() => deleteWord(word._id)}>Sil</button>
                                     </td>
                                 </tr>
                             ))}

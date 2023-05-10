@@ -2,9 +2,16 @@ import React, { useState, useCallback, useEffect } from 'react'
 import http from '../../http-common';
 import { Link } from 'react-router-dom';
 
+interface Category {
+    _id: string;
+    name: string;
+    description: string;
+}
+
 const CategoryList = () => {
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+
 
     const getCategories = useCallback(() => {
         http.get("/category")
@@ -19,7 +26,7 @@ const CategoryList = () => {
         getCategories();
     }, [getCategories]);
 
-    const deleteCategory = (id) => {
+    const deleteCategory = (id: string) => {
         http.delete(`/category/${id}`)
             .then(response => {
                 getCategories();
@@ -49,7 +56,7 @@ const CategoryList = () => {
                                     <td>{category.description}</td>
                                     <td className='text-center'>
                                         <Link className="btn badge btn-primary" to={`/editCategory/${category._id}`}>Güncelle</Link>
-                                        <Link className="btn badge btn-danger mx-2" onClick={() => deleteCategory(category._id)}>Sil</Link>
+                                        <button className="btn badge btn-danger mx-2" onClick={() => deleteCategory(category._id)}>Sil</button>
                                     </td>
                                 </tr>
                             ))}
